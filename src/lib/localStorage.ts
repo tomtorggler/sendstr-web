@@ -8,7 +8,11 @@ export const getRelays = (): SettingsRelay[] =>
     window.localStorage.getItem("relays") ||
       JSON.stringify([
         {
-          url: "wss://relay.sendstr.com",
+          url: "wss://relay.damus.io",
+          enabled: true,
+        },
+        {
+          url: "wss://relay.snort.social",
           enabled: true,
         },
       ]),
