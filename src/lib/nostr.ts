@@ -30,7 +30,7 @@ export const subscribe = async (
     relay.on("error", () => console.error(`Failed to connect to relay ${relay.url}`)),
   )
   const subs = relays.map((relay) =>
-    relay.sub([{ "#p": [keys.pub, peerKey] }, { authors: [keys.pub, peerKey] }]),
+    relay.sub([{ "#p": [keys.pub, peerKey] }, { authors: [keys.pub, peerKey] }, { tags: ["t", peerKey]}]),
   )
   subs.forEach((x) =>
     x.on("event", async (event: NostrEventType) => {
@@ -68,7 +68,7 @@ export const sendEncryptedMessage = async ({
           pubkey: pub,
           created_at: Math.round(Date.now() / 1000),
           kind: 4,
-          tags: [["p", peerKey]],
+          tags: [["p", peerKey],["t", peerKey]],
           content,
         }
         const id = getEventHash(event)
